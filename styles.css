@@ -91,11 +91,54 @@ h1 {
 }
 
 dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.259);
+    background-color: rgba(0, 0, 0, 0.412);
 }
 
 dialog {
     margin: auto;
     display: flex;
     flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 5rem;
+    border-radius: 15px;
+}
+
+dialog h2 {
+    color: hsl(1, 53%, 42%);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+input[type="submit"], .form-field button {
+    margin: 2rem auto 0 auto;
+    padding: 1rem;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.542);
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    background-color: hsl(1, 53%, 42%);
+    color: whitesmoke;
+}
+
+.form-field button {
+    background-color: whitesmoke;
+    color: hsl(1, 53%, 42%);
+}
+
+input[type="submit"]:active, .form-field button:active {
+    box-shadow: inset 5px 5px 15px -5px rgba(0, 0, 0, 0.542);
 }
