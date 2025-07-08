@@ -8,30 +8,30 @@
 </head>
 <body>
     <h1>MY LIBRARY</h1>
-    <button type="button" id="addNewBtn">ADD A NEW BOOK</button>
+    <button type="button" id="add-new-btn">ADD A NEW BOOK</button>
     <div id="books-container"></div>
 
-    <dialog>
+    <dialog closed>
         <h2>ADD A NEW BOOK</h2>
-        <form>
+        <form method="dialog">
             <div class="form-field">
                 <label for="new-title">Title:</label>
-                <input type="text" id="new-title" name="new-title">
+                <input type="text" id="new-title" name="new-title" required>
             </div>
             
             <div class="form-field">
                 <label for="new-author">Author:</label>
-                <input type="text" name="new-author" id="new-author">
+                <input type="text" name="new-author" id="new-author" required>
             </div>
 
             <div class="form-field">
                 <label for="new-year">Year: </label>
-                <input type="text" name="new-year" id="new-year">
+                <input type="text" name="new-year" id="new-year" required>
             </div>
 
             <div class="form-field">
-                <input type="submit" value="ADD TO LIBRARY" id="submit">
-                <button>CANCEL</button>
+                <button value="default" id="submit-btn" class="form-btn">ADD TO LIBRARY</button>
+                <button value="cancel" formmethod="dialog" id="cancel-btn" class="form-btn">CANCEL</button>
             </div>
         </form>
     </dialog>

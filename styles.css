@@ -78,7 +78,7 @@ h1 {
     text-align: center;
 }
 
-#addNewBtn {
+#add-new-btn {
     padding: 16px;
     border-radius: 25px;
     border: none;
@@ -86,12 +86,16 @@ h1 {
     margin-bottom: 1rem;
 }
 
-#addNewBtn:active {
+#add-new-btn:active {
     box-shadow: inset 5px 5px 15px -5px rgba(0, 0, 0, 0.542);
 }
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.412);
+}
+
+dialog:not([open]) {
+    display: none !important;
 }
 
 dialog {
@@ -120,7 +124,7 @@ form {
     gap: 1rem;
 }
 
-input[type="submit"], .form-field button {
+.form-btn {
     margin: 2rem auto 0 auto;
     padding: 1rem;
     border-radius: 25px;
@@ -129,16 +133,16 @@ input[type="submit"], .form-field button {
     font-weight: bold;
 }
 
-input[type="submit"] {
+#submit-btn {
     background-color: hsl(1, 53%, 42%);
     color: whitesmoke;
 }
 
-.form-field button {
+#cancel-btn {
     background-color: whitesmoke;
     color: hsl(1, 53%, 42%);
 }
 
-input[type="submit"]:active, .form-field button:active {
+.form-btn:active {
     box-shadow: inset 5px 5px 15px -5px rgba(0, 0, 0, 0.542);
 }
