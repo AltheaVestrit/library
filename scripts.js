@@ -40,7 +40,9 @@ function renderBook(book) {
     const readSpan = document.createElement("span");
     readSpan.innerText = book.read;
     readSpan.classList += "read-span";
-    readSpan["data-span-id"] = book.id;
+    if (book.read === "READ") {
+        readSpan.classList += " read";
+    };
 
     const titleDiv = document.createElement("div");
     titleDiv.classList += "title";
@@ -67,13 +69,21 @@ function renderBook(book) {
     editDiv.classList += "edit-div";
 
     const readBtn = document.createElement("button");
-    readBtn.innerText = "READ";
+    if (book.read === "READ") {
+        readBtn.innerText = "UNMARK AS READ";
+    } else {
+        readBtn.innerText = "MARK AS READ";
+    };
     readBtn.classList += "read-btn book-btn";
     readBtn["data-id"] = book.id;
     readBtn.addEventListener("click", function () {
         const bookId = this["data-id"];
         const bookIndex = myLibrary.findIndex(book => book.id === bookId);
-        myLibrary[bookIndex].read = "READ";
+        if (this.innerText === "MARK AS READ") {
+            myLibrary[bookIndex].read = "READ";
+        } else {
+            myLibrary[bookIndex].read = "NOT READ";
+        };
         loadLibrary();
     })
 
