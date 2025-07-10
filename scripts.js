@@ -7,20 +7,21 @@ const nameField = document.querySelector("#new-title");
 const authorField = document.querySelector("#new-author");
 const yearField = document.querySelector("#new-year");
 
-const myLibrary = [];
+let myLibrary = [];
 
-function Book(name, author, year) {
+function Book(name, author, year, read) {
     if (!new.target) {
         throw Error("You need to use the 'new' keyword to create a new instance of Book")
     }
     this.name = name;
     this.author = author;
     this.year = year;
+    this.read = read;
     this.id = crypto.randomUUID();
 }
 
 function addBookToLibrary(name, author, year) {
-    myLibrary.push(new Book(name, author, year));
+    myLibrary.push(new Book(name, author, year, "NOT READ"));
 }
 
 addBookToLibrary("Emma", "Jane Austen", 1815);
@@ -31,43 +32,88 @@ addBookToLibrary("Mansfield Park", "Jane Austen", 1814);
 addBookToLibrary("Persuasion", "Jane Austen", 1818);
 addBookToLibrary("Lady Susan", "Jane Austen", 1871);
 
+function renderBook(book) {
+    const newBook = document.createElement("div");
+    newBook.classList += "book";
+    newBook.id = book.id;
+
+    const readSpan = document.createElement("span");
+    readSpan.innerText = book.read;
+    readSpan.classList += "read-span";
+    readSpan["data-span-id"] = book.id;
+
+    const titleDiv = document.createElement("div");
+    titleDiv.classList += "title";
+
+    const titleText = document.createElement("h2");
+    titleText.innerText = book.name;
+
+    const detailsDiv = document.createElement("div");
+    detailsDiv.classList += "details";
+
+    const authorP = document.createElement("p");
+    authorP.classList += "author";
+    authorP.innerText = book.author;
+
+    const yearP = document.createElement("p");
+    yearP.classList += "year";
+    yearP.innerText = book.year;
+
+    const idP = document.createElement("p");
+    idP.classList += "id";
+    idP.innerText = book.id;
+
+    const editDiv = document.createElement("div");
+    editDiv.classList += "edit-div";
+
+    const readBtn = document.createElement("button");
+    readBtn.innerText = "READ";
+    readBtn.classList += "read-btn book-btn";
+    readBtn["data-id"] = book.id;
+    readBtn.addEventListener("click", function () {
+        const bookId = this["data-id"];
+        const bookIndex = myLibrary.findIndex(book => book.id === bookId);
+        myLibrary[bookIndex].read = "READ";
+        loadLibrary();
+    })
+
+    const removeBtn = document.createElement("button");
+    removeBtn.innerText = "REMOVE"
+    removeBtn["data-id"] = book.id;
+    removeBtn.classList += "remove-btn book-btn";
+    removeBtn.addEventListener("click", function () {
+        const bookId = this["data-id"];
+        myLibrary = myLibrary.filter(book => book.id != bookId);
+        loadLibrary();
+    });
+
+    detailsDiv.appendChild(authorP);
+    detailsDiv.appendChild(yearP);
+    detailsDiv.appendChild(idP);
+
+    titleDiv.appendChild(titleText);
+
+    editDiv.appendChild(readBtn);
+    editDiv.appendChild(removeBtn);
+
+    newBook.appendChild(readSpan);
+    newBook.appendChild(titleDiv);
+    newBook.appendChild(detailsDiv);
+    newBook.appendChild(editDiv);
+
+    booksContainer.appendChild(newBook);
+}
+
+function resetLibrary() {
+    while (booksContainer.hasChildNodes()) {
+        booksContainer.removeChild(booksContainer.firstChild);
+    }
+}
+
 function loadLibrary() {
+    resetLibrary();
     myLibrary.forEach((book) => {
-        const newBook = document.createElement("div");
-        newBook.classList += "book";
-        newBook.id = book.id;
-
-        const titleDiv = document.createElement("div");
-        titleDiv.classList += "title";
-
-        const titleText = document.createElement("h2");
-        titleText.innerText = book.name;
-
-        const detailsDiv = document.createElement("div");
-        detailsDiv.classList += "details";
-
-        const authorP = document.createElement("p");
-        authorP.classList += "author";
-        authorP.innerText = book.author;
-
-        const yearP = document.createElement("p");
-        yearP.classList += "year";
-        yearP.innerText = book.year;
-
-        const idP = document.createElement("p");
-        idP.classList += "id";
-        idP.innerText = book.id;
-
-        detailsDiv.appendChild(authorP);
-        detailsDiv.appendChild(yearP);
-        detailsDiv.appendChild(idP);
-
-        titleDiv.appendChild(titleText);
-
-        newBook.appendChild(titleDiv);
-        newBook.appendChild(detailsDiv);
-
-        booksContainer.appendChild(newBook);
+        renderBook(book);
     })
 }
 

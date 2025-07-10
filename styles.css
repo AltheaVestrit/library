@@ -44,6 +44,7 @@ h1 {
     padding: 1rem;
     border-radius: 5px;
     gap: 1.4rem;
+    text-align: center;
 }
 
 .title {
@@ -94,6 +95,7 @@ dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.412);
 }
 
+/* To ensure dialog is not open at page load: */
 dialog:not([open]) {
     display: none !important;
 }
@@ -145,4 +147,34 @@ form {
 
 .form-btn:active {
     box-shadow: inset 5px 5px 15px -5px rgba(0, 0, 0, 0.542);
+}
+
+.edit-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-btn {
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 5px 5px 15px -2px rgba(0, 0, 0, 0.542);
+}
+
+.read-btn {
+    background-color: hsl(1, 53%, 42%);
+    color: whitesmoke;
+}
+
+.book-btn:active {
+    box-shadow: inset 5px 5px 15px -5px rgba(0, 0, 0, 0.542);
+}
+
+.read-span {
+    color: rgb(177, 177, 177);
+}
+
+.read-span[innerText = "READ"] {
+    color: black;
+    font-weight: bold;
 }
