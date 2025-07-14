@@ -99,7 +99,7 @@ function renderBook(book) {
 
     detailsDiv.appendChild(authorP);
     detailsDiv.appendChild(yearP);
-    detailsDiv.appendChild(idP);
+    // detailsDiv.appendChild(idP);
 
     titleDiv.appendChild(titleText);
 
@@ -111,7 +111,7 @@ function renderBook(book) {
     newBook.appendChild(detailsDiv);
     newBook.appendChild(editDiv);
 
-    booksContainer.appendChild(newBook);
+    booksContainer.insertBefore(newBook, booksContainer.firstChild);
 }
 
 function resetLibrary() {
