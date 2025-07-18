@@ -9,19 +9,18 @@ const yearField = document.querySelector("#new-year");
 
 let myLibrary = [];
 
-function Book(name, author, year, read) {
-    if (!new.target) {
-        throw Error("You need to use the 'new' keyword to create a new instance of Book")
+class Book {
+    constructor(name = "Unknown", author = "Unknown", year = "????", read = "") {
+        this.name = name ? name : "Unknown";
+        this.author = author ? author : "Unknown";
+        this.year = year ? year : "????";
+        this.read = read ? read : "NOT READ";
+        this.id = crypto.randomUUID();
     }
-    this.name = name;
-    this.author = author;
-    this.year = year;
-    this.read = read;
-    this.id = crypto.randomUUID();
-}
+};
 
 function addBookToLibrary(name, author, year) {
-    myLibrary.push(new Book(name, author, year, "NOT READ"));
+    myLibrary.push(new Book(name, author, year));
 }
 
 addBookToLibrary("Emma", "Jane Austen", 1815);
